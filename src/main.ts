@@ -12,6 +12,7 @@ import App from '@/App.vue'
 import gloalComponent from '@/components';
 // 引入模板的全部样式
 import '@/styles/index.sass'
+import router from './router';
 
 // 获取应用实例对象
 const app = createApp(App)
@@ -21,6 +22,7 @@ app.use(ElementPlus, {
 })
 // 安装自定义插件
 app.use(gloalComponent);
-
+// 注册模板路由
+app.use(router)
 // 将应用挂载到挂载点上
 app.mount('#app')
