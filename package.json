@@ -21,6 +21,7 @@
     "eslint-plugin-node": "^11.1.0",
     "fast-glob": "^3.2.12",
     "mockjs": "^1.1.0",
+    "nprogress": "^0.2.0",
     "sass": "^1.62.1",
     "vue": "^3.2.47",
     "vue-router": "^4.2.1"
