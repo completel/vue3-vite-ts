@@ -17,6 +17,7 @@
 1. 安装 `npm i vite-plugin-svg-icons`  
 
 2. 配置插件  
+
     1. `vite.config.ts`
     ```ts
     import { defineConfig } from 'vite'
@@ -46,6 +47,7 @@
     ```
 
     2. 在`src/main.ts`内引入注册脚本
+    
     ```ts
     import 'virtual:svg-icons-register'
     ```
