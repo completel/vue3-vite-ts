@@ -10,8 +10,8 @@ export default [
     {
         // 登录成功以后展示数据页面
         path: '/',
-        name: 'home',
-        component: () => import('@/views/home/index.vue')
+        name: 'layout',
+        component: () => import('@/layout/index.vue')
     },
     {
         // 404路由
