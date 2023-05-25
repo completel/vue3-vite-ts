@@ -51,6 +51,7 @@
     ```ts
     import 'virtual:svg-icons-register'
     ```
+    
 3. 如何使用
 ```vue
 <script setup lang="ts">
