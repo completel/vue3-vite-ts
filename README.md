@@ -18,7 +18,7 @@
 
 2. 配置插件  
 
-    1. `vite.config.ts`
+    1. 在`vite.config.ts`配置如下
     ```ts
     import { defineConfig } from 'vite'
     import vue from '@vitejs/plugin-vue'
