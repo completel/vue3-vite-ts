@@ -8,11 +8,14 @@ import type { logInForm, loginResponseData } from '@/api/user/type'
 import { UserState } from './types/type'
 // 引入仓库本地存储的工具方法
 import { SET_TOKEN, GET_TOKEN } from '@/utils/token'
+// 引入路由（常量路由）
+import routes from '@/router/routes'
 
 const useUserStore = defineStore('user', {
     state: (): UserState => {
         return {
             token: GET_TOKEN(), // 用户唯一token
+            routes // 仓库存储生成菜单需要数组（路由）
         }
     },
     // 异步|逻辑的地方

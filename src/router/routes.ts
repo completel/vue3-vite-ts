@@ -11,7 +11,13 @@ export default [
         // 登录成功以后展示数据页面
         path: '/',
         name: 'layout',
-        component: () => import('@/layout/index.vue')
+        component: () => import('@/layout/index.vue'),
+        children: [
+            {
+                path: '/home',
+                component: () => import('@/views/home/index.vue'),
+            }
+        ]
     },
     {
         // 404路由
