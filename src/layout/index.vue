@@ -1,33 +1,59 @@
 <template>
     <div class="layout_container">
         <!-- 左侧菜单 -->
-        <div class="layout_slider">
+        <div class="layout_slider" :class="{ fold: layoutSettingStore.fold ? true : false }">
             <Logo></Logo>
             <!-- 滚动条 -->
             <el-scrollbar class="scrollbar">
-                <!-- 菜单组件 -->
-                <el-menu background-color="#001529" text-color="white">
+                <!-- 菜单组件 也可以加入 router 属性实现跳转 -->
+                <el-menu background-color="#001529" text-color="white" :default-active="$route.path"
+                    :collapse="layoutSettingStore.fold ? true : false">
                     <!-- 根据动态生成菜单组件 -->
-                    <Menu :menuList="userStore"></Menu>
+                    <Menu :menuList="userStore.routes"></Menu>
                 </el-menu>
             </el-scrollbar>
         </div>
         <!-- 顶部导航 -->
-        <div class="layout_tabbar">456</div>
+        <div class="layout_tabbar" :class="{ fold: layoutSettingStore.fold ? true : false }">
+            <!-- layout组件顶部tabbar -->
+            <Tabbar></Tabbar>
+        </div>
         <!-- 内容展示区域 -->
-        <div class="layout_main">789</div>
+        <div class="layout_main" :class="{ fold: layoutSettingStore.fold ? true : false }">
+            <Main></Main>
+        </div>
     </div>
 </template>
 
 <script setup lang="ts">
+// 引入路由对象
+import { useRoute } from 'vue-router'
 // 引入左侧菜单logo子组件
 import Logo from '@/layout/logo/index.vue'
 // 引入菜单子组件
 import Menu from '@/layout/menu/index.vue'
+// 引入顶部tabbar组件
+import Tabbar from './tabbar/index.vue'
 // 获取用户相关的小仓库
-import useUserStore from '@/sotre/module/user'
+import useUserStore from '@/store/module/user'
+// 右侧内容展示区域
+import Main from './main/index.vue'
+// 引入小仓库
+import useLayOutSettingStore from '@/store/module/settins'
+
 const userStore = useUserStore()
 
+// 获取路由对象
+const $route = useRoute()
+
+const layoutSettingStore = useLayOutSettingStore()
+
+</script>
+
+<script lang="ts">
+export default {
+    name: 'Layout'
+}
 </script>
 
 <style scoped lang="scss">
@@ -39,10 +65,19 @@ const userStore = useUserStore()
         width: $base-menu-width;
         height: 100vh;
         background-color: $base-menu-background;
+        transition: all .3s;
 
         .scrollbar {
             width: 100%;
             height: calc(100vh - $base-menu-logo-height);
+
+            .el-menu {
+                border-right: none;
+            }
+        }
+
+        &.fold {
+            width: $base-menu-min-width;
         }
     }
 
@@ -52,7 +87,11 @@ const userStore = useUserStore()
         right: 0;
         width: calc(100% - $base-menu-width);
         height: $base-table-height;
-        background-color: skyblue;
+
+        &.fold {
+            width: calc(100vw - $base-menu-min-width);
+            transition: all .3s;
+        }
     }
 
     .layout_main {
@@ -64,6 +103,12 @@ const userStore = useUserStore()
         background-color: pink;
         padding: 20px;
         overflow: auto;
+
+        &.fold {
+            width: calc(100vw - $base-menu-min-width);
+            left: $base-menu-min-width;
+            transition: all .3s;
+        }
     }
 }
 </style>

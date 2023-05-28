@@ -28,7 +28,7 @@
 import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { ElNotification, FormRules } from 'element-plus'
-import useUserStore from '@/sotre/module/user'
+import useUserStore from '@/store/module/user'
 import { User, Lock } from '@element-plus/icons-vue'
 import { getTime } from '@/utils/time'
 

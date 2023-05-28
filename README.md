@@ -160,3 +160,36 @@ export default defineConfig(({ command }) => {
 ```
 
 3. 最后在根目录创建`mock`文件夹
+
+
+## 5. 路由相关ts类型
+1. 通过父组件给子组件传递路由信息  
+```vue
+<template>
+  <Menu :menuList="userStore.routes"></Menu>
+</template>
+
+<script setup lang="ts">
+// 获取用户相关的小仓库
+import useUserStore from '@/sotre/module/user'
+const userStore = useUserStore()
+
+</script>
+```
+
+2. 子组件接收并定义ts类型  
+``` vue
+<script setup lang="ts" >
+import type { RouteRecordRaw } from "vue-router"
+
+interface Routers {
+  menuList: Array<RouteRecordRaw>
+}
+// 获取父组件传递过来的全部路由数据
+defineProps<Routers>()
+
+</script>
+```
+
+3. `!`告知编译器此值不可能为空值
+> 在定义`template`模板中使用`menuList`时，`meta`的类型是为定义的，所以通过`item.meta!.hidden`的形式
