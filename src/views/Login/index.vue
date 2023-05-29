@@ -26,7 +26,7 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import { ElNotification, FormRules } from 'element-plus'
 import useUserStore from '@/store/module/user'
 import { User, Lock } from '@element-plus/icons-vue'
@@ -40,6 +40,8 @@ const loginForm = reactive({
 const useStore = useUserStore()
 // 获取路由器
 const $router = useRouter()
+// 获取路由对象
+const $route = useRoute()
 // 定义变量控制按钮加载效果
 const loading = ref(false)
 // 获取el-form组件
@@ -58,8 +60,10 @@ const login = async () => {
     try {
         // 保证登陆成功
         await useStore.userLogin(loginForm)
+        // 判断登陆的时候，路由路径是否有query参数，如果有就往query参数跳转，没有跳转到首页
+        let redirect = $route.query.redirect
         // 编程式导航
-        $router.push('/')
+        $router.push({ path: redirect as string || 'home' })
         // 登录成功的提示信息
         ElNotification({
             type: 'success',
@@ -79,7 +83,6 @@ const login = async () => {
     }
 
 }
-
 // 自定义校验规则函数
 const validatorUserName = (_: any, value: any, callback: any) => {
     // rule：即为校验规则对象
@@ -99,7 +102,6 @@ const validatorPassword = (_: any, value: any, callback: any) => {
         callback(new Error('密码长度至少六位'))
     }
 }
-
 // 定义表单校验需要配置的对象 FormRules 表单验证是类型，有提示
 const rules = reactive<FormRules>({
     // 规则对象属性：required：代表这个字段务必要校验

@@ -4,3 +4,6 @@ export const SET_TOKEN = (token: string) => localStorage.setItem('TOKEN', token)
 
 // 本地存储获取数据
 export const GET_TOKEN = () => localStorage.getItem('TOKEN')
+
+// 本地存储删除数据方法
+export const REMOVE_TOKEN = (token: string) => localStorage.removeItem(token)

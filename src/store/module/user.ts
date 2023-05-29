@@ -1,13 +1,15 @@
 // 创建用户相关小仓库
 import { defineStore } from 'pinia'
+// 引入element-plus 消息提示
+import { ElMessage } from 'element-plus'
 // 引入接口
-import { reqLogin } from '@/api/user'
+import { reqLogin, reqUserInfo } from '@/api/user'
 // 引入数据类型
 import type { logInForm, loginResponseData } from '@/api/user/type'
 // 引入小仓库类型
 import { UserState } from './types/type'
 // 引入仓库本地存储的工具方法
-import { SET_TOKEN, GET_TOKEN } from '@/utils/token'
+import { SET_TOKEN, GET_TOKEN, REMOVE_TOKEN } from '@/utils/token'
 // 引入路由（常量路由）
 import routes from '@/router/routes'
 
@@ -15,7 +17,9 @@ const useUserStore = defineStore('user', {
     state: (): UserState => {
         return {
             token: GET_TOKEN(), // 用户唯一token
-            routes // 仓库存储生成菜单需要数组（路由）
+            routes, // 仓库存储生成菜单需要数组（路由）
+            username: '',
+            avatar: ''
         }
     },
     // 异步|逻辑的地方
@@ -37,6 +41,28 @@ const useUserStore = defineStore('user', {
                 return Promise.reject(new Error(result.data.message))
             }
 
+        },
+        // 获取用户信息的方法
+        async userInfo() {
+            // 获取用户的信息仓储到仓库中[用户头像、名字]
+            const result = await reqUserInfo()
+            if (result.code == 200) {
+                this.username = result.data.checkUser.username
+                this.avatar = result.data.checkUser.avatar
+            } else {
+                ElMessage({
+                    message: '获取用户信息失败，请退出登录重试一下~',
+                    type: 'warning',
+                })
+            }
+        },
+        // 退出登录
+        userLogout() {
+            // 目前没有mock接口：退出登录接口（通知服务器本地用户唯一唯一表示失效）
+            this.token = ''
+            this.username = ''
+            this.avatar = ''
+            REMOVE_TOKEN(this.token)
         }
     },
     getters: {

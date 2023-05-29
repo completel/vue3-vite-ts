@@ -1,5 +1,6 @@
 // 对外暴露配置路由
 export default [
+    // login
     {
         // 登录
         path: '/login',
@@ -26,6 +27,7 @@ export default [
         children: [
             {
                 path: '/home',
+                name: 'home',
                 component: () => import('@/views/home/index.vue'),
                 meta: {
                     title: '首页',
@@ -136,6 +138,7 @@ export default [
             }
         ]
     },
+    // 404
     {
         // 404路由
         path: '/404',

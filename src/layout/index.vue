@@ -26,6 +26,7 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted } from 'vue'
 // 引入路由对象
 import { useRoute } from 'vue-router'
 // 引入左侧菜单logo子组件
@@ -42,11 +43,14 @@ import Main from './main/index.vue'
 import useLayOutSettingStore from '@/store/module/settins'
 
 const userStore = useUserStore()
-
 // 获取路由对象
 const $route = useRoute()
-
 const layoutSettingStore = useLayOutSettingStore()
+
+// 首页挂载完毕发请求获取用户信息
+onMounted(() => {
+    userStore.userInfo()
+})
 
 </script>
 
