@@ -1,7 +1,7 @@
 <template>
     <div class="layout_container">
         <!-- 左侧菜单 -->
-        <div class="layout_slider" :class="{ fold: layoutSettingStore.fold ? true : false }">
+        <div class="layout_slider">
             <Logo></Logo>
             <!-- 滚动条 -->
             <el-scrollbar class="scrollbar">
@@ -26,7 +26,6 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
 // 引入路由对象
 import { useRoute } from 'vue-router'
 // 引入左侧菜单logo子组件
@@ -46,11 +45,6 @@ const userStore = useUserStore()
 // 获取路由对象
 const $route = useRoute()
 const layoutSettingStore = useLayOutSettingStore()
-
-// 首页挂载完毕发请求获取用户信息
-onMounted(() => {
-    userStore.userInfo()
-})
 
 </script>
 
@@ -78,10 +72,6 @@ export default {
             .el-menu {
                 border-right: none;
             }
-        }
-
-        &.fold {
-            width: $base-menu-min-width;
         }
     }
 

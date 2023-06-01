@@ -26,7 +26,7 @@ export default {
     justify-content: space-between;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to right, #eef2f3, rgba(0, 21, 41, .2), #d5d5d5);
+    background: linear-gradient(to right, #eef2f3, #e1f1ff, #d5d5d5);
 
     .tabbar_left {
         display: flex;
