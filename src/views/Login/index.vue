@@ -34,7 +34,7 @@ import { getTime } from '@/utils/time'
 
 const loginForm = reactive({
     username: 'admin',
-    password: '123456'
+    password: 'atguigu123'
 })
 
 const useStore = useUserStore()

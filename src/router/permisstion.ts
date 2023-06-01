@@ -38,7 +38,7 @@ router.beforeEach(async (to, _, next) => {
                     // token过期，获取到用户信息
                     // 用户手动删除了本地存储
                     // 退出登录->用户相关的数据清空
-                    userStore.userLogout()
+                    await userStore.userLogout()
                     next({ path: '/login', query: { redirect: to.path } })
                 }
             }
