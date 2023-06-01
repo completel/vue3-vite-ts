@@ -94,7 +94,6 @@ export default {
         top: $base-table-height;
         width: calc(100% - $base-menu-width);
         height: calc(100vh - $base-table-height);
-        background-color: pink;
         padding: 20px;
         overflow: auto;
 
