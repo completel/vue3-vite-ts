@@ -13,8 +13,8 @@ export default [
             icon: 'Promotion' // 菜单文字左侧的图标，支持element-plus全部图标
         }
     },
+    // 登录成功以后展示数据页面
     {
-        // 登录成功以后展示数据页面
         path: '/',
         name: 'layout',
         component: () => import('@/layout/index.vue'),

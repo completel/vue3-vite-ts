@@ -1,4 +1,4 @@
-## 1. vite 运行常见报错
+## 一. vite 运行常见报错
 
 1. `tsconfig.json`中`moduleResolution`应该改成`node`。
 2. `tsconfig.node.json`中`moduleResolution`也改成`node`。
@@ -12,7 +12,7 @@
    }
    ```
 
-## 2. 使用`vite-plugin-svg-icons`插件
+## 二. 使用`vite-plugin-svg-icons`插件
 
 1. 安装 `npm i vite-plugin-svg-icons`  
 
@@ -88,7 +88,7 @@ const symbolId = computed(() => `${props.prefix}-${props.name}`)
 ```
 
 
-## 3. 设置别名@
+## 三. 设置别名@
 
 1. `vite.config.ts`增加如下配置
 ```ts
@@ -131,7 +131,7 @@ export default defineConfig({
 }
 ```
 
-## 4. mock插件
+## 四. mock插件
 1. 安装`vite-plugin-mock`和`mockjs`  
 ```shell
 # vite-plugin-mock这个插件要装3.0以下版本
@@ -162,7 +162,7 @@ export default defineConfig(({ command }) => {
 3. 最后在根目录创建`mock`文件夹
 
 
-## 5. 路由相关ts类型
+## 五. 路由相关ts类型
 1. 通过父组件给子组件传递路由信息  
 ```vue
 <template>
@@ -193,3 +193,37 @@ defineProps<Routers>()
 
 3. `!`告知编译器此值不可能为空值
 > 在定义`template`模板中使用`menuList`时，`meta`的类型是为定义的，所以通过`item.meta!.hidden`的形式
+
+
+## 六. 遇到的BUG怎么解决
+### 1. 在`src/views/product/trademark/index.vue`路径下遇到了以下问题
+1. 计算属性计算出一个正确的网址格式，忽略了服务器会返回null这个问题
+``` vue
+<script lang='ts' setup>
+const newImgUrl = computed(() => {
+    return (row: TradeMark): string => {
+        if (row.logoUrl == null) {
+            return ''
+        } else {
+            return row.logoUrl.includes('http') ? row.logoUrl : `http://${row.logoUrl}`
+        }
+    }
+})
+</script>
+```
+
+2. 给路由组件添加了过渡动画，`src/layout/main/index.vue`，应该在对应的路由组件添加上根元素标签
+```vue
+<!-- 在路由组件src/views/product/trademark/index.vue -->
+<template>
+  <div>
+    <el-card>
+      ……
+    </el-card>
+    <el-dialog>
+      ……
+    </el-dialog>
+  </div>
+</template>
+```
+
