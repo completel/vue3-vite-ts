@@ -1,12 +1,14 @@
 import { App } from 'vue'
 // 引入项目中全部的全局组件
 import SvgIcon from '@/components/SvgIcon/index.vue'
+import Category from '@/components/Category/index.vue'
 // 引入element-plus提供全部图表组件
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 
 // 全局对象
 const allGloablComponent: { [key: string]: object } = {
     SvgIcon,
+    Category
 }
 
 // 对外暴露插件对象
