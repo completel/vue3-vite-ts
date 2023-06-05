@@ -195,7 +195,7 @@ defineProps<Routers>()
 > 在定义`template`模板中使用`menuList`时，`meta`的类型是为定义的，所以通过`item.meta!.hidden`的形式
 
 
-## 六. 遇到的BUG怎么解决
+## 六. 遇到的问题
 ### 1. 在`src/views/product/trademark/index.vue`路径下遇到了以下问题
 1. 计算属性计算出一个正确的网址格式，忽略了服务器会返回null这个问题
 ``` vue
@@ -227,3 +227,22 @@ const newImgUrl = computed(() => {
 </template>
 ```
 
+### 2. 作用域插槽给row定义ts类型
+```vue
+<template>
+  <template #="{ row }: { row: Attr }">
+      <el-tag 
+        :type="tagColor(item.id as number)" 
+        style="margin: 5px"
+        v-for="item in row.attrValueList" 
+        :key="item.id"
+      >
+        {{ item.valueName }}
+      </el-tag>
+  </template>
+</template>
+
+<script setup lang="ts">
+  import type { Attr } from '@/api/product/attr/type'
+</script>
+```

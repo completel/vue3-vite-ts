@@ -8,17 +8,15 @@
                     <el-table-column label="序号" type="index" align="center" width="80px"></el-table-column>
                     <el-table-column label="属性名称" width="150px" prop="attrName"></el-table-column>
                     <el-table-column label="属性值名称">
-                        <template #="{ row }">
-                            <el-tag :type="tagColor((item as AttrValue).id as number)" style="margin: 5px"
-                                v-for="item in row.attrValueList" :key="(item as AttrValue).id">{{ (item as
-                                    AttrValue).valueName
-                                }}</el-tag>
+                        <template #="{ row }: { row: Attr }">
+                            <el-tag :type=" tagColor(item.id as number) " style="margin: 5px"
+                                v-for=" item  in  row.attrValueList " :key=" item.id ">{{item.valueName}}</el-tag>
                         </template>
                     </el-table-column>
                     <el-table-column label="操作" width="150px">
                         <!-- row：代表已有属性对象 -->
-                        <template #="{}">
-                            <el-button type="primary" icon="Edit" @click="updateAttr"></el-button>
+                        <template #=" { } ">
+                            <el-button type="primary" icon="Edit" @click=" updateAttr "></el-button>
                             <el-button type="danger" icon="Delete"></el-button>
                         </template>
                     </el-table-column>
@@ -26,28 +24,28 @@
 
                 </el-table>
             </div>
-            <div v-show="scene == 1">
+            <div v-show=" scene == 1 ">
                 <!-- 展示添加属性与修改数据的结构 -->
-                <el-form :inline="true">
+                <el-form :inline=" true ">
                     <el-form-item label="属性名称">
-                        <el-input placeholder="请你输入属性名称" v-model="attrParams.attrName"></el-input>
+                        <el-input placeholder="请你输入属性名称" v-model=" attrParams.attrName "></el-input>
                     </el-form-item>
                 </el-form>
-                <el-button type="primary" icon="Plus" :disabled="!attrParams.attrName"
-                    @click="addAttrValue">添加属性</el-button>
-                <el-button type="primary" @click="cancel">取消</el-button>
-                <el-table border style="margin: 10px 0" :data="attrParams.attrValueList">
+                <el-button type="primary" icon="Plus" :disabled=" !attrParams.attrName "
+                    @click=" addAttrValue ">添加属性</el-button>
+                <el-button type="primary" @click=" cancel ">取消</el-button>
+                <el-table border style="margin: 10px 0" :data=" attrParams.attrValueList ">
                     <el-table-column label="序号" width="80px" type="index" align="center"></el-table-column>
                     <el-table-column label="属性值名称">
                         <!-- row:即为当前属性值对象 -->
-                        <template #="{ row }">
-                            <el-input placeholder="请属于属性值名称" v-model="row.valueName"></el-input>
+                        <template #=" { row } ">
+                            <el-input placeholder="请属于属性值名称" v-model=" row.valueName "></el-input>
                         </template>
                     </el-table-column>
                     <el-table-column label="属性值操作"></el-table-column>
                 </el-table>
-                <el-button type="primary" @click="save">保存</el-button>
-                <el-button type="primary" @click="cancel">取消</el-button>
+                <el-button type="primary" @click=" save ">保存</el-button>
+                <el-button type="primary" @click=" cancel ">取消</el-button>
             </div>
         </el-card>
     </div>
@@ -57,7 +55,7 @@
 import { ref, reactive, watch, computed } from 'vue'
 // 引入获取已有属性与属性值接口
 import { reqAttr, reqAddOrUpdateAttr } from '@/api/product/attr'
-import type { AttrResponseData, Attr, AttrValue } from '@/api/product/attr/type'
+import type { AttrResponseData, Attr } from '@/api/product/attr/type'
 // 获取分类的仓库
 import useCategoryStore from '@/store/module/category'
 import { ElMessage } from 'element-plus'
