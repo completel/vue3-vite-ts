@@ -7,7 +7,7 @@
 
 <script setup lang="ts">
 // 引入设置标题与logo配置文件
-import setting from '@/setting';
+import setting from '@/setting'
 </script>
 
 <script lang="ts">
