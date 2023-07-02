@@ -1,19 +1,21 @@
 <template>
-    <el-card>
-        <div class="box">
-            <img :src="userStore.avatar" alt="" class="active">
-            <div class="bottom">
-                <h3 class="title">{{ getTime() }}好{{ userStore.username }}</h3>
-                <p class="subtitle">{{ setting.title }}</p>
+    <div>
+        <el-card>
+            <div class="box">
+                <img :src="userStore.avatar" alt="" class="active">
+                <div class="bottom">
+                    <h3 class="title">{{ getTime() }}好{{ userStore.username }}</h3>
+                    <p class="subtitle">{{ setting.title }}</p>
+                </div>
             </div>
+        </el-card>
+        <div class="brand">
+            <p>{{ yiyanData?.hitokoto }}</p>
+            <p class="from">《{{ yiyanData?.from }}》</p>
         </div>
-    </el-card>
-    <div class="brand">
-        <p>{{ yiyanData?.hitokoto }}</p>
-        <p class="from">《{{ yiyanData?.from }}》</p>
-    </div>
-    <div class="icon">
-        <svg-icon name="welcome" width="500px" height="500px"></svg-icon>
+        <div class="icon">
+            <svg-icon name="welcome" width="500px" height="500px"></svg-icon>
+        </div>
     </div>
 </template>
 
